@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Display JSON data</title>
+    <script>
+      window.addEventListener('click', init, false);
+      function init (e){
+        document
+          .getElementById('myButton')
+          .addEventListener('click', docLoader, false);
+      }
+      function reqListener(){
+        //convert the string in the file to an object
+        var obj = JSON.parse(this.responseText);
+        //display the objects data like any object
+        for(var prop in obj){
+          document.writeln(prop + '<br>');
+        }
+      }
+      function docLoader(){
+        var oReq = new XMLHttpRequest();
+        oReq.onload = reqListener;
+        oReq.open('get', 'Data.json', true);
+        oReq.send();
+      }
+    </script>
+  </head>
+  <body>
+    <button id="myButton" type="button">click to load</button>
+  </body>
